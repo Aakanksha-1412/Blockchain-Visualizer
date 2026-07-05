@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core Concepts - Blockchain Visualizer</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Floating Background Particle Effect -->
+  <div id="particles-container"></div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">
+          <i data-lucide="layers" style="color: #FFFFFF; width: 1.25rem; height: 1.25rem;"></i>
+        </div>
+        <span class="logo-text">ARBITRUM<span class="logo-badge">PODS</span></span>
+      </a>
+      
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link" id="link-home">Home</a></li>
+        <li><a href="concepts.html" class="nav-link active" id="link-concepts">Concepts</a></li>
+        <li><a href="prices.html" class="nav-link" id="link-prices">Live Prices</a></li>
+        <li><a href="simulator.html" class="nav-link" id="link-simulator">Simulator</a></li>
+        <li>
+          <button class="nav-cta" onclick="window.location.href='simulator.html'">
+            <i data-lucide="cpu" style="width: 1rem; height: 1rem;"></i> Launch Simulator
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    
+    <!-- Header Section -->
+    <section class="hero" style="padding: 3rem 1rem 1rem;">
+      <div class="hero-badge">
+        <i data-lucide="book-open" style="width: 0.9rem; height: 0.9rem;"></i> Web3 Learning Hub
+      </div>
+      <h1 class="hero-title" style="margin-bottom: 1rem;">
+        Mastering <span>Web3 & Layer 2</span> Technology
+      </h1>
+      <p class="hero-subtitle">
+        Explore interactive, beautifully formatted cheat sheets summarizing the structural differences between traditional technologies and the trustless architectures of Ethereum and Arbitrum.
+      </p>
+    </section>
+
+    <!-- Concepts Grid -->
+    <section class="concepts-section" style="padding-bottom: 4rem;">
+      <div class="concepts-grid">
+
+        <!-- SPECIAL ARBITRUM FOCUS CARD -->
+        <div class="concept-card arbitrum-special">
+          <div style="display: flex; flex-direction: column; md:flex-row; justify-content: space-between; align-items: flex-start; gap: 1.5rem;">
+            <div style="flex: 1;">
+              <div class="concept-icon" style="background: rgba(37, 99, 235, 0.15); color: #3b82f6;">
+                <img src="https://assets.coingecko.com/coins/images/16547/large/photo_2023-03-29_21.47.00.jpeg" alt="Arbitrum Logo" style="width: 1.75rem; height: 1.75rem; border-radius: 50%;" referrerpolicy="no-referrer">
+              </div>
+              <h3 style="font-size: 1.75rem; color: #FFFFFF; font-family: var(--font-display); margin-bottom: 0.75rem;">
+                Arbitrum: Next-Generation Layer 2 scaling
+              </h3>
+              <p style="font-size: 1.05rem; margin-bottom: 1.25rem; color: var(--text-gray); line-height: 1.6;">
+                Arbitrum is an advanced suite of Ethereum scaling solutions utilizing **Optimistic Rollups**. By moving transaction execution off-chain while anchoring final verification to the battle-tested base of Ethereum Layer 1, Arbitrum slashes gas fees by up to 95% while keeping pristine decentralized security.
+              </p>
+            </div>
+          </div>
+          
+          <div class="concept-comparison" style="margin-top: 1.5rem; gap: 2rem;">
+            <div class="comparison-col">
+              <h4 style="color: #60a5fa; font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="zap" style="width: 1.1rem; height: 1.1rem;"></i> Why Arbitrum is Faster
+              </h4>
+              <p>
+                Ethereum L1 processes roughly 15 transactions per second (TPS). Arbitrum processes thousands! It achieves this by bundling (or rolling up) hundreds of private user interactions into a single condensed transaction package before submitting it to the main chain.
+              </p>
+            </div>
+            <div class="comparison-col">
+              <h4 style="color: #c084fc; font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="trending-up" style="width: 1.1rem; height: 1.1rem;"></i> Benefits of L2 Rollups
+              </h4>
+              <p>
+                Developers write smart contracts in Solidity exactly like L1, but users pay fractions of a penny in gas fees. Transactions settle instantly, unlocking high-frequency DeFi trading, gaming, and responsive Web3 applications without congesting Ethereum.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Web2 vs Web3 Card -->
+        <div class="concept-card">
+          <div class="concept-icon"><i data-lucide="globe"></i></div>
+          <h3>Web2 vs Web3</h3>
+          <p>Web2 was characterized by centralized social media, corporate monopolies, cloud servers, and users as products. Web3 shifts ownership back to the users using secure public ledger states.</p>
+          <div class="concept-comparison">
+            <div class="comparison-col">
+              <h4>Web2 (Centralized)</h4>
+              <p>Data stored in corporate cloud services (AWS, Google). Users have zero ownership of digital identity.</p>
+            </div>
+            <div class="comparison-col">
+              <h4>Web3 (Decentralized)</h4>
+              <p>Data is self-sovereign, stored in public cryptographically authenticated node rings owned by users.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ethereum vs Bitcoin Card -->
+        <div class="concept-card">
+          <div class="concept-icon"><i data-lucide="coins"></i></div>
+          <h3>Ethereum vs Bitcoin</h3>
+          <p>While Bitcoin functions primarily as digital scarce store of value, Ethereum is a global Turing-complete computing system backing decentralized apps.</p>
+          <div class="concept-comparison">
+            <div class="comparison-col">
+              <h4>Bitcoin (BTC)</h4>
+              <p>Strictly peer-to-peer cash network. Highly secure, but limited scriptability by design.</p>
+            </div>
+            <div class="comparison-col">
+              <h4>Ethereum (ETH)</h4>
+              <p>Programmable software sandbox. Runs complex custom program variables called Smart Contracts.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Public Key vs Private Key Card -->
+        <div class="concept-card">
+          <div class="concept-icon"><i data-lucide="key-round"></i></div>
+          <h3>Public Key vs Private Key</h3>
+          <p>Asymmetric cryptography secures Web3 balances. Your public key acts as your inbox address, while your private key is your personal signing seal.</p>
+          <div class="concept-comparison">
+            <div class="comparison-col">
+              <h4>Public Key (Address)</h4>
+              <p>Safe to share publicly. Used by others to send assets directly to your wallet account.</p>
+            </div>
+            <div class="comparison-col">
+              <h4>Private Key (Signature)</h4>
+              <p>Must NEVER be shared. Used to sign digital proofs approving transactions and transfers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blockchain vs Traditional Database Card -->
+        <div class="concept-card">
+          <div class="concept-icon"><i data-lucide="database"></i></div>
+          <h3>Blockchain vs Database</h3>
+          <p>Traditional SQL databases rely on an absolute administrator, whereas blockchains govern changes via algorithmic peer networks.</p>
+          <div class="concept-comparison">
+            <div class="comparison-col">
+              <h4>Traditional Database</h4>
+              <p>Read/Write/Delete control held by database admins. Easy to modify histories, prone to single points of hack failure.</p>
+            </div>
+            <div class="comparison-col">
+              <h4>Blockchain Ledger</h4>
+              <p>Append-only. Historical logs can never be rewritten. Changes must satisfy structural consensus audits.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Smart Contract Card -->
+        <div class="concept-card">
+          <div class="concept-icon"><i data-lucide="file-json"></i></div>
+          <h3>Smart Contracts</h3>
+          <p>Automated agreements stored inside blocks. They execute code deterministically when specific input states are met, bypassing middlemen.</p>
+          <ul style="list-style: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); font-size: 0.9rem;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="arrow-right" style="color: var(--primary-purple); width: 1rem;"></i> <strong>Decentralized Execution:</strong> No human arbitrator can stop, cancel, or alter active transactions.</li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="arrow-right" style="color: var(--primary-purple); width: 1rem;"></i> <strong>Solidity / EVM:</strong> Compiled into bytecode readable by the Ethereum Virtual Machine (EVM).</li>
+          </ul>
+        </div>
+
+        <!-- Consensus Mechanism Card -->
+        <div class="concept-card">
+          <div class="concept-icon"><i data-lucide="users"></i></div>
+          <h3>Consensus Mechanisms</h3>
+          <p>The rules governing how nodes agree on the true state of the ledger. These secure the network from double-spend cyber attacks.</p>
+          <div class="concept-comparison">
+            <div class="comparison-col">
+              <h4>Proof of Work (PoW)</h4>
+              <p>Nodes compete by burning hardware electricity to solve mathematical hashes. Highly secure but energy intensive.</p>
+            </div>
+            <div class="comparison-col">
+              <h4>Proof of Stake (PoS)</h4>
+              <p>Validators stake capital (ETH) to win block creation rights. 99.9% more eco-friendly and lightning-fast.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gas Fee Card -->
+        <div class="concept-card">
+          <div class="concept-icon"><i data-lucide="fuel"></i></div>
+          <h3>Gas Fees</h3>
+          <p>The cost required to run execution logs on the EVM. It protects the global computer from infinite loops and spam operations.</p>
+          <ul style="list-style: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); font-size: 0.9rem;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="arrow-right" style="color: var(--primary-blue); width: 1rem;"></i> <strong>Dynamic Pricing:</strong> Gas cost rises during heavy congestion, pricing out lower value trades.</li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="arrow-right" style="color: var(--primary-blue); width: 1rem;"></i> <strong>Gwei Units:</strong> Standard Ethereum gas bids are calculated in small fractions of Ether called Gwei.</li>
+          </ul>
+        </div>
+
+        <!-- Layer 1 vs Layer 2 Card -->
+        <div class="concept-card">
+          <div class="concept-icon"><i data-lucide="split"></i></div>
+          <h3>Layer 1 vs Layer 2</h3>
+          <p>Modern blockchains are designed as multi-layered stacks. Layer 1 provides security and consensus, while Layer 2 handles massive transaction execution.</p>
+          <div class="concept-comparison">
+            <div class="comparison-col">
+              <h4>Layer 1 (The Settlement Layer)</h4>
+              <p>Main Ethereum chain. Decentralized and extremely secure, but slow and expensive during volume spikes.</p>
+            </div>
+            <div class="comparison-col">
+              <h4>Layer 2 (The Execution Layer)</h4>
+              <p>Scaling platforms like Arbitrum. Executes trades instantly, bundles them, and posts proofs to L1.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="logo-link">
+          <div class="logo-icon">
+            <i data-lucide="layers" style="color: #FFFFFF; width: 1.1rem; height: 1.1rem;"></i>
+          </div>
+          <span class="logo-text">ARBITRUM<span class="logo-badge">PODS</span></span>
+        </a>
+        <p>A cutting-edge visual classroom visualizer illustrating block connections, security seals, and consensus mechanics. Built for the Arbitrum Builder Pods assignment.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Learning Hub</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="index.html" class="footer-link">Home Visualizer</a></li>
+          <li class="footer-link-item"><a href="concepts.html" class="footer-link">Web3 Concepts</a></li>
+          <li class="footer-link-item"><a href="prices.html" class="footer-link">Crypto Price Feeds</a></li>
+          <li class="footer-link-item"><a href="simulator.html" class="footer-link">Simulator Sandbox</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Arbitrum Tech</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="https://arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Arbitrum.io</a></li>
+          <li class="footer-link-item"><a href="https://portal.arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Developer Portal</a></li>
+          <li class="footer-link-item"><a href="https://offchainlabs.com/" target="_blank" class="footer-link" rel="noreferrer">Offchain Labs</a></li>
+          <li class="footer-link-item"><a href="https://docs.arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Documentation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Developer Info</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Course Assignment</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Arbitrum Builder Pods</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Vanilla HTML, CSS & JS</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Portfolio Grade Project</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        &copy; 2026 Arbitrum Builder Pods Visualizer. Created under open-source academic guidelines. All rights reserved.
+      </div>
+      <div class="footer-socials">
+        <a href="https://github.com" target="_blank" class="social-icon" rel="noreferrer" aria-label="GitHub"><i data-lucide="github" style="width: 1rem; height: 1rem;"></i></a>
+        <a href="https://twitter.com" target="_blank" class="social-icon" rel="noreferrer" aria-label="Twitter"><i data-lucide="twitter" style="width: 1rem; height: 1rem;"></i></a>
+        <a href="https://discord.gg" target="_blank" class="social-icon" rel="noreferrer" aria-label="Discord"><i data-lucide="message-square" style="width: 1rem; height: 1rem;"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="/js/app.js"></script>
+  
+  <!-- Render Lucide Vectors -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

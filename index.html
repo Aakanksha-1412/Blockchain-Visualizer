@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitrum Builder Pods - Blockchain Visualizer</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Floating Background Particle Effect -->
+  <div id="particles-container"></div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-link" id="nav-logo">
+        <div class="logo-icon">
+          <i data-lucide="layers" style="color: #FFFFFF; width: 1.25rem; height: 1.25rem;"></i>
+        </div>
+        <span class="logo-text">ARBITRUM<span class="logo-badge">PODS</span></span>
+      </a>
+      
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active" id="link-home">Home</a></li>
+        <li><a href="concepts.html" class="nav-link" id="link-concepts">Concepts</a></li>
+        <li><a href="prices.html" class="nav-link" id="link-prices">Live Prices</a></li>
+        <li><a href="simulator.html" class="nav-link" id="link-simulator">Simulator</a></li>
+        <li>
+          <button class="nav-cta" onclick="window.location.href='simulator.html'">
+            <i data-lucide="cpu" style="width: 1rem; height: 1rem;"></i> Launch Simulator
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero-section">
+      <div class="hero-badge">
+        <i data-lucide="sparkles" style="width: 0.9rem; height: 0.9rem;"></i> Arbitrum Builder Pods Assignment
+      </div>
+      <h1 class="hero-title">
+        How Blocks Stay Connected<br>in a <span>Blockchain</span>
+      </h1>
+      <p class="hero-subtitle">
+        Understand blockchain's structural integrity visually. Explore how cryptographic links keep distributed records safe from tampering, using the intuitive analogy of a Linked List.
+      </p>
+
+      <!-- Linked List vs Blockchain analogy infographic -->
+      <div class="analogy-container">
+        <div class="analogy-card" id="card-linked-list">
+          <div class="analogy-header">
+            <div class="analogy-icon-wrap">
+              <i data-lucide="link"></i>
+            </div>
+            <h3>Linked List Structure</h3>
+          </div>
+          <p>A classic programming data structure where elements are chained sequentially. Modification is trivial since links are simple reference memory pointers.</p>
+          <div class="analogy-comparison-item">
+            <div class="analogy-label">Node Linkage</div>
+            <div class="analogy-value">Stores RAM address of NEXT Node</div>
+          </div>
+          <div class="analogy-comparison-item">
+            <div class="analogy-label">Tamper Security</div>
+            <div class="analogy-value" style="color: var(--red-danger);">Zero Cryptographic Validation</div>
+          </div>
+        </div>
+
+        <div class="analogy-vs">
+          <div class="vs-circle">VS</div>
+        </div>
+
+        <div class="analogy-card blockchain-analogy" id="card-blockchain">
+          <div class="analogy-header">
+            <div class="analogy-icon-wrap">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <h3>Blockchain Structure</h3>
+          </div>
+          <p>A cryptographically sealed distributed ledger. Every block contains a secure link to the prior block. Changing one record breaks every link downstream.</p>
+          <div class="analogy-comparison-item">
+            <div class="analogy-label">Block Linkage</div>
+            <div class="analogy-value">Stores SHA-256 HASH of PREVIOUS Block</div>
+          </div>
+          <div class="analogy-comparison-item">
+            <div class="analogy-label">Tamper Security</div>
+            <div class="analogy-value" style="color: var(--green-success);">Strict Tamper Evident Seals</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="hero-cta-btn" onclick="document.getElementById('visualizer-section').scrollIntoView({behavior: 'smooth'})">
+        <span>Explore the Visual Chain</span> <i data-lucide="arrow-down"></i>
+      </button>
+    </section>
+
+    <!-- Interactive Blockchain Visualization Section -->
+    <section class="blocks-visualizer-section" id="visualizer-section">
+      <div class="section-header">
+        <span class="section-tag">Interactive Diagram</span>
+        <h2 class="section-title">The Cryptographic Web of Trust</h2>
+        <p class="section-subtitle">Below are four interconnected blocks. Try editing the <strong>Transaction Data</strong> inside Block 2 and watch how the cascade of trust dissolves instantly!</p>
+      </div>
+
+      <!-- Blockchain Scroll View -->
+      <div class="blockchain-scroll-container">
+        <div class="blockchain-row" id="blockchain-visualization-row">
+          
+          <!-- BLOCK 1 -->
+          <div class="visual-block valid-block" id="block-1">
+            <div class="block-header">
+              <span class="block-title-number">Block #1 (Genesis)</span>
+              <span class="block-status status-valid" id="block-1-status">✔ VALID</span>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Previous Hash</label>
+              <textarea class="block-input prev-hash-textarea" id="block-1-prev" readonly></textarea>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Transaction Data</label>
+              <input type="text" class="block-input" id="block-1-data">
+            </div>
+
+            <div class="block-field">
+              <label class="block-field-label">Block Hash (SHA-256)</label>
+              <div class="block-hash-display" id="block-1-hash">Calculating...</div>
+            </div>
+
+            <div class="block-nonce-wrapper">
+              <span class="block-field-label" style="margin: 0;">Nonce</span>
+              <span class="block-nonce-val" id="block-1-nonce">0</span>
+            </div>
+
+            <button class="block-mine-btn" id="block-1-mine">
+              <i data-lucide="hammer" style="width: 0.9rem; height: 0.9rem;"></i> Mine Block
+            </button>
+          </div>
+
+          <!-- Connection 1 -> 2 -->
+          <div class="block-connection" id="connection-1">
+            <div class="arrow-line" id="arrow-2">
+              <div class="connection-dot"></div>
+            </div>
+          </div>
+
+          <!-- BLOCK 2 -->
+          <div class="visual-block valid-block" id="block-2">
+            <div class="block-header">
+              <span class="block-title-number">Block #2</span>
+              <span class="block-status status-valid" id="block-2-status">✔ VALID</span>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Previous Hash</label>
+              <textarea class="block-input prev-hash-textarea" id="block-2-prev" readonly></textarea>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Transaction Data</label>
+              <input type="text" class="block-input" id="block-2-data">
+            </div>
+
+            <div class="block-field">
+              <label class="block-field-label">Block Hash (SHA-256)</label>
+              <div class="block-hash-display" id="block-2-hash">Calculating...</div>
+            </div>
+
+            <div class="block-nonce-wrapper">
+              <span class="block-field-label" style="margin: 0;">Nonce</span>
+              <span class="block-nonce-val" id="block-2-nonce">0</span>
+            </div>
+
+            <button class="block-mine-btn" id="block-2-mine">
+              <i data-lucide="hammer" style="width: 0.9rem; height: 0.9rem;"></i> Mine Block
+            </button>
+          </div>
+
+          <!-- Connection 2 -> 3 -->
+          <div class="block-connection" id="connection-2">
+            <div class="arrow-line" id="arrow-3">
+              <div class="connection-dot"></div>
+            </div>
+          </div>
+
+          <!-- BLOCK 3 -->
+          <div class="visual-block valid-block" id="block-3">
+            <div class="block-header">
+              <span class="block-title-number">Block #3</span>
+              <span class="block-status status-valid" id="block-3-status">✔ VALID</span>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Previous Hash</label>
+              <textarea class="block-input prev-hash-textarea" id="block-3-prev" readonly></textarea>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Transaction Data</label>
+              <input type="text" class="block-input" id="block-3-data">
+            </div>
+
+            <div class="block-field">
+              <label class="block-field-label">Block Hash (SHA-256)</label>
+              <div class="block-hash-display" id="block-3-hash">Calculating...</div>
+            </div>
+
+            <div class="block-nonce-wrapper">
+              <span class="block-field-label" style="margin: 0;">Nonce</span>
+              <span class="block-nonce-val" id="block-3-nonce">0</span>
+            </div>
+
+            <button class="block-mine-btn" id="block-3-mine">
+              <i data-lucide="hammer" style="width: 0.9rem; height: 0.9rem;"></i> Mine Block
+            </button>
+          </div>
+
+          <!-- Connection 3 -> 4 -->
+          <div class="block-connection" id="connection-3">
+            <div class="arrow-line" id="arrow-4">
+              <div class="connection-dot"></div>
+            </div>
+          </div>
+
+          <!-- BLOCK 4 -->
+          <div class="visual-block valid-block" id="block-4">
+            <div class="block-header">
+              <span class="block-title-number">Block #4</span>
+              <span class="block-status status-valid" id="block-4-status">✔ VALID</span>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Previous Hash</label>
+              <textarea class="block-input prev-hash-textarea" id="block-4-prev" readonly></textarea>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Transaction Data</label>
+              <input type="text" class="block-input" id="block-4-data">
+            </div>
+
+            <div class="block-field">
+              <label class="block-field-label">Block Hash (SHA-256)</label>
+              <div class="block-hash-display" id="block-4-hash">Calculating...</div>
+            </div>
+
+            <div class="block-nonce-wrapper">
+              <span class="block-field-label" style="margin: 0;">Nonce</span>
+              <span class="block-nonce-val" id="block-4-nonce">0</span>
+            </div>
+
+            <button class="block-mine-btn" id="block-4-mine">
+              <i data-lucide="hammer" style="width: 0.9rem; height: 0.9rem;"></i> Mine Block
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Chain Healing Control Bar -->
+      <div class="visualizer-controls">
+        <button class="btn-control" id="repair-chain-btn">
+          <i data-lucide="wrench"></i> Repair Blockchain Integrity
+        </button>
+      </div>
+    </section>
+
+    <!-- Hash Demonstration (Why does one character change everything?) -->
+    <section class="hash-demo-section" id="hash-demo-section">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="section-tag">Interactive Demo</span>
+        <h2 class="section-title">Why One Character Changes Everything</h2>
+        <p class="section-subtitle">Explore the "Avalanche Effect" in cryptography. See how typing a single letter creates a completely non-related, high-entropy 256-bit secure hash.</p>
+      </div>
+
+      <div class="hash-demo-grid">
+        <div>
+          <label class="hash-demo-label" for="hash-input-demo">
+            <i data-lucide="keyboard" style="color: var(--primary-purple); width: 1.25rem; height: 1.25rem;"></i> Edit Transaction Data
+          </label>
+          <textarea class="hash-demo-textarea" id="hash-input-demo" placeholder="Type here...">Alice pays Bob 10 ETH</textarea>
+        </div>
+
+        <div class="hash-result-box">
+          <div>
+            <div class="hash-display-label">Old Original Hash (Default Text)</div>
+            <div class="hash-output" id="hash-old-output" style="border-left-color: var(--text-muted); opacity: 0.6;">-</div>
+          </div>
+          <div>
+            <div class="hash-display-label">New Computed Hash (Real-time Hash)</div>
+            <div class="hash-output" id="hash-new-output">-</div>
+          </div>
+          <div class="hash-avalanche-info">
+            <strong>The Avalanche Effect:</strong> Changing a single letter doesn't just change one character in the hash—it generates a completely different and unpredictable 64-character output. This prevents malicious actors from guessing what changes were made!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compare Linked List vs Blockchain -->
+    <section class="comparison-section">
+      <div class="section-header">
+        <span class="section-tag">Structural Comparison</span>
+        <h2 class="section-title">Linked List vs Blockchain</h2>
+        <p class="section-subtitle">Analyze how standard linear memory chains compare to security-hardened cryptographic ledgers.</p>
+      </div>
+
+      <div class="comparison-grid">
+        <!-- Linked List Card -->
+        <div class="compare-card">
+          <h3 class="compare-title">
+            <i data-lucide="link" style="color: var(--primary-blue);"></i> Linked List
+          </h3>
+          <ul class="compare-list">
+            <li class="compare-item">
+              <i data-lucide="check" class="compare-item-icon"></i>
+              <div>
+                <strong>Memory Pointer Storage</strong>
+                Each element holds the physical RAM address pointing to the next node.
+              </div>
+            </li>
+            <li class="compare-item">
+              <i data-lucide="check" class="compare-item-icon"></i>
+              <div>
+                <strong>Trivial Modifications</strong>
+                You can easily insert, update, or remove node links silently without affecting other nodes.
+              </div>
+            </li>
+            <li class="compare-item">
+              <i data-lucide="check" class="compare-item-icon"></i>
+              <div>
+                <strong>Simple Sequential Store</strong>
+                Excellent for general transient software data storage; provides zero record auditability.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Blockchain Card -->
+        <div class="compare-card">
+          <h3 class="compare-title blockchain-title">
+            <i data-lucide="shield" style="color: var(--primary-purple);"></i> Blockchain Ledger
+          </h3>
+          <ul class="compare-list">
+            <li class="compare-item">
+              <i data-lucide="check" class="compare-item-icon"></i>
+              <div>
+                <strong>Cryptographical Back-Linkage</strong>
+                Each block stores a unique SHA-256 hash representing all data in the preceding block.
+              </div>
+            </li>
+            <li class="compare-item">
+              <i data-lucide="check" class="compare-item-icon"></i>
+              <div>
+                <strong>Strict Tamper Evidence</strong>
+                Altering historical transaction data changes its block hash, breaking the entire downstream connection.
+              </div>
+            </li>
+            <li class="compare-item">
+              <i data-lucide="check" class="compare-item-icon"></i>
+              <div>
+                <strong>Distributed Consensus</strong>
+                Maintained across hundreds of independent validator pods, preventing single points of database failure.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three Premium Feature Cards -->
+    <section class="features-section">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="lock" style="width: 1.5rem; height: 1.5rem;"></i>
+          </div>
+          <h3>Tamper Resistant</h3>
+          <p>Once written, historical data cannot be modified silently. Any unauthorized edit breaks the subsequent chains immediately, showing as an invalid status across the entire node ring.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="git-commit" style="width: 1.5rem; height: 1.5rem;"></i>
+          </div>
+          <h3>Linked Blocks</h3>
+          <p>Every node retains the previous block's SHA-256 footprint. This immutable reference acts as a mechanical, transparent seal proving the timeline of historical events.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="network" style="width: 1.5rem; height: 1.5rem;"></i>
+          </div>
+          <h3>Distributed Network</h3>
+          <p>Arbitrum Builder Pods run across global consensus engines. No single cloud provider, database admin, or malicious hacker can compromise the database integrity.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transaction Workflow Timeline -->
+    <section class="timeline-section">
+      <div class="section-header">
+        <span class="section-tag">Ledger Life Cycle</span>
+        <h2 class="section-title">How Data Gets Block-Chained</h2>
+        <p class="section-subtitle">Walk through the sequential step-by-step pipeline of a transaction submission inside Web3 systems.</p>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-step">
+          <div class="timeline-badge">1</div>
+          <h4>Transaction Created</h4>
+          <p>User signs a transaction (e.g. sending 10 ETH) and broadcasts it to the network.</p>
+        </div>
+        
+        <div class="timeline-step">
+          <div class="timeline-badge">2</div>
+          <h4>Block Formed</h4>
+          <p>Builder pods gather pending transactions, packing them tightly inside a new candidate block.</p>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-badge">3</div>
+          <h4>Hash Generated</h4>
+          <p>The builder seal calculations are run, locking the prior block's signature into the current block.</p>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-badge">4</div>
+          <h4>PoW Verified</h4>
+          <p>Validators check that the calculated block hash adheres to the strict protocol puzzle guidelines.</p>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-badge">5</div>
+          <h4>Chain Locked</h4>
+          <p>The block is written to the immutable ledger. It is now cryptographically secured forever.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="logo-link">
+          <div class="logo-icon">
+            <i data-lucide="layers" style="color: #FFFFFF; width: 1.1rem; height: 1.1rem;"></i>
+          </div>
+          <span class="logo-text">ARBITRUM<span class="logo-badge">PODS</span></span>
+        </a>
+        <p>A cutting-edge visual classroom visualizer illustrating block connections, security seals, and consensus mechanics. Built for the Arbitrum Builder Pods assignment.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Learning Hub</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="index.html" class="footer-link">Home Visualizer</a></li>
+          <li class="footer-link-item"><a href="concepts.html" class="footer-link">Web3 Concepts</a></li>
+          <li class="footer-link-item"><a href="prices.html" class="footer-link">Crypto Price Feeds</a></li>
+          <li class="footer-link-item"><a href="simulator.html" class="footer-link">Simulator Sandbox</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Arbitrum Tech</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="https://arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Arbitrum.io</a></li>
+          <li class="footer-link-item"><a href="https://portal.arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Developer Portal</a></li>
+          <li class="footer-link-item"><a href="https://offchainlabs.com/" target="_blank" class="footer-link" rel="noreferrer">Offchain Labs</a></li>
+          <li class="footer-link-item"><a href="https://docs.arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Documentation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Developer Info</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Course Assignment</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Arbitrum Builder Pods</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Vanilla HTML, CSS & JS</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Portfolio Grade Project</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        &copy; 2026 Arbitrum Builder Pods Visualizer. Created under open-source academic guidelines. All rights reserved.
+      </div>
+      <div class="footer-socials">
+        <a href="https://github.com" target="_blank" class="social-icon" rel="noreferrer" aria-label="GitHub"><i data-lucide="github" style="width: 1rem; height: 1rem;"></i></a>
+        <a href="https://twitter.com" target="_blank" class="social-icon" rel="noreferrer" aria-label="Twitter"><i data-lucide="twitter" style="width: 1rem; height: 1rem;"></i></a>
+        <a href="https://discord.gg" target="_blank" class="social-icon" rel="noreferrer" aria-label="Discord"><i data-lucide="message-square" style="width: 1rem; height: 1rem;"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="/js/app.js"></script>
+  
+  <!-- Render Lucide Vectors -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

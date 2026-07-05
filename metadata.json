@@ -1,0 +1,6 @@
+{
+  "name": "Blockchain Visualizer",
+  "description": "An interactive, educational blockchain visualization and simulator tool with real-time crypto prices.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

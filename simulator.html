@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blockchain Simulator Sandbox - Blockchain Visualizer</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Floating Background Particle Effect -->
+  <div id="particles-container"></div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">
+          <i data-lucide="layers" style="color: #FFFFFF; width: 1.25rem; height: 1.25rem;"></i>
+        </div>
+        <span class="logo-text">ARBITRUM<span class="logo-badge">PODS</span></span>
+      </a>
+      
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link" id="link-home">Home</a></li>
+        <li><a href="concepts.html" class="nav-link" id="link-concepts">Concepts</a></li>
+        <li><a href="prices.html" class="nav-link" id="link-prices">Live Prices</a></li>
+        <li><a href="simulator.html" class="nav-link active" id="link-simulator">Simulator</a></li>
+        <li>
+          <button class="nav-cta" onclick="window.location.href='simulator.html'">
+            <i data-lucide="cpu" style="width: 1rem; height: 1rem;"></i> Launch Simulator
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero" style="padding: 3rem 1rem 1.5rem;">
+      <div class="hero-badge">
+        <i data-lucide="terminal" style="width: 0.9rem; height: 0.9rem;"></i> Sandbox Lab Environment
+      </div>
+      <h1 class="hero-title" style="margin-bottom: 1rem;">
+        The Blockchain <span>Simulator</span> Lab
+      </h1>
+      <p class="hero-subtitle">
+        A hands-on environment to test, attack, and rebuild a local blockchain database. Edit details, trace mathematical proof invalidations, and execute custom consensus healing loops.
+      </p>
+    </section>
+
+    <!-- Simulator Layout -->
+    <section class="simulator-layout-wrapper" style="padding-bottom: 5rem;">
+      
+      <!-- Top Explainer Info Box -->
+      <div class="simulator-explainer" style="margin-bottom: 3rem;">
+        <div class="explainer-icon">
+          <i data-lucide="info" style="width: 1.5rem; height: 1.5rem;"></i>
+        </div>
+        <div class="explainer-text">
+          <h3>Interactive Sandbox Instructions</h3>
+          <p>
+            This blockchain is initially perfectly mined and valid. Type inside any block's <strong>Transaction Data</strong> field to alter records. Observe how the change instantly invalidates both that block and all following blocks. Use the individual <strong>Mine Block</strong> buttons to re-solve that block's mathematical difficulty target, or click the global <strong>Heal Chain</strong> button to automate the sequential mining loop!
+          </p>
+        </div>
+      </div>
+
+      <!-- Simulator Row of 4 Blocks (Vertical Layout for complete detail and text explanations) -->
+      <div class="simulator-blocks-column" style="display: flex; flex-direction: column; gap: 2rem;">
+
+        <!-- BLOCK 1 -->
+        <div class="visual-block valid-block" id="sandbox-block-1" style="width: 100%; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <!-- Left: Input Fields -->
+          <div>
+            <div class="block-header">
+              <span class="block-title-number">Block #1 (Genesis)</span>
+              <span class="block-status status-valid" id="sim-block-1-status">✔ VALID</span>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Previous Hash</label>
+              <textarea class="block-input prev-hash-textarea" id="sim-block-1-prev" readonly></textarea>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Transaction Data (Editable)</label>
+              <textarea class="block-input" id="sim-block-1-data" style="height: 60px; resize: vertical;"></textarea>
+            </div>
+          </div>
+
+          <!-- Right: Hash, Nonce, Mine, and Live Logs -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="block-field" style="margin-bottom: 0.5rem;">
+                <label class="block-field-label">Current Calculated Hash</label>
+                <div class="block-hash-display" id="sim-block-1-hash">Calculating...</div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                <div class="block-nonce-wrapper" style="flex: 1;">
+                  <span class="block-field-label" style="margin: 0;">Nonce</span>
+                  <span class="block-nonce-val" id="sim-block-1-nonce">0</span>
+                </div>
+                <button class="block-mine-btn" id="sim-block-1-mine" style="margin: 0; flex: 1.5; padding: 0.65rem;">
+                  <i data-lucide="hammer" style="width: 0.9rem; height: 0.9rem;"></i> Mine Block #1
+                </button>
+              </div>
+            </div>
+
+            <!-- Dynamic Educational Diagnostic Log -->
+            <div class="hash-avalanche-info" id="sim-block-1-explain" style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.05); padding: 0.75rem; min-height: 80px; display: flex; align-items: center;">
+              <span style="color: var(--text-muted); font-size: 0.85rem;">Sandbox logs loading...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection Arrow 1 -> 2 -->
+        <div style="display: flex; justify-content: center; height: 40px; align-items: center; position: relative;">
+          <div class="block-connection" style="width: 2px; height: 100%; flex-direction: row;" id="sim-arrow-2">
+            <div class="arrow-line" style="width: 2px; height: 100%;" id="sim-arrow-line-2">
+              <div class="connection-dot" style="top: 0; left: -3px; animation: slide-dot-vertical 1.5s infinite linear;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCK 2 -->
+        <div class="visual-block valid-block" id="sandbox-block-2" style="width: 100%; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <!-- Left: Input Fields -->
+          <div>
+            <div class="block-header">
+              <span class="block-title-number">Block #2</span>
+              <span class="block-status status-valid" id="sim-block-2-status">✔ VALID</span>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Previous Hash</label>
+              <textarea class="block-input prev-hash-textarea" id="sim-block-2-prev" readonly></textarea>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Transaction Data (Editable)</label>
+              <textarea class="block-input" id="sim-block-2-data" style="height: 60px; resize: vertical;"></textarea>
+            </div>
+          </div>
+
+          <!-- Right: Hash, Nonce, Mine, and Live Logs -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="block-field" style="margin-bottom: 0.5rem;">
+                <label class="block-field-label">Current Calculated Hash</label>
+                <div class="block-hash-display" id="sim-block-2-hash">Calculating...</div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                <div class="block-nonce-wrapper" style="flex: 1;">
+                  <span class="block-field-label" style="margin: 0;">Nonce</span>
+                  <span class="block-nonce-val" id="sim-block-2-nonce">0</span>
+                </div>
+                <button class="block-mine-btn" id="sim-block-2-mine" style="margin: 0; flex: 1.5; padding: 0.65rem;">
+                  <i data-lucide="hammer" style="width: 0.9rem; height: 0.9rem;"></i> Mine Block #2
+                </button>
+              </div>
+            </div>
+
+            <!-- Dynamic Educational Diagnostic Log -->
+            <div class="hash-avalanche-info" id="sim-block-2-explain" style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.05); padding: 0.75rem; min-height: 80px; display: flex; align-items: center;">
+              <span style="color: var(--text-muted); font-size: 0.85rem;">Sandbox logs loading...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection Arrow 2 -> 3 -->
+        <div style="display: flex; justify-content: center; height: 40px; align-items: center;">
+          <div class="block-connection" style="width: 2px; height: 100%; flex-direction: row;" id="sim-arrow-3">
+            <div class="arrow-line" style="width: 2px; height: 100%;" id="sim-arrow-line-3">
+              <div class="connection-dot" style="top: 0; left: -3px; animation: slide-dot-vertical 1.5s infinite linear;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCK 3 -->
+        <div class="visual-block valid-block" id="sandbox-block-3" style="width: 100%; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <!-- Left: Input Fields -->
+          <div>
+            <div class="block-header">
+              <span class="block-title-number">Block #3</span>
+              <span class="block-status status-valid" id="sim-block-3-status">✔ VALID</span>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Previous Hash</label>
+              <textarea class="block-input prev-hash-textarea" id="sim-block-3-prev" readonly></textarea>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Transaction Data (Editable)</label>
+              <textarea class="block-input" id="sim-block-3-data" style="height: 60px; resize: vertical;"></textarea>
+            </div>
+          </div>
+
+          <!-- Right: Hash, Nonce, Mine, and Live Logs -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="block-field" style="margin-bottom: 0.5rem;">
+                <label class="block-field-label">Current Calculated Hash</label>
+                <div class="block-hash-display" id="sim-block-3-hash">Calculating...</div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                <div class="block-nonce-wrapper" style="flex: 1;">
+                  <span class="block-field-label" style="margin: 0;">Nonce</span>
+                  <span class="block-nonce-val" id="sim-block-3-nonce">0</span>
+                </div>
+                <button class="block-mine-btn" id="sim-block-3-mine" style="margin: 0; flex: 1.5; padding: 0.65rem;">
+                  <i data-lucide="hammer" style="width: 0.9rem; height: 0.9rem;"></i> Mine Block #3
+                </button>
+              </div>
+            </div>
+
+            <!-- Dynamic Educational Diagnostic Log -->
+            <div class="hash-avalanche-info" id="sim-block-3-explain" style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.05); padding: 0.75rem; min-height: 80px; display: flex; align-items: center;">
+              <span style="color: var(--text-muted); font-size: 0.85rem;">Sandbox logs loading...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection Arrow 3 -> 4 -->
+        <div style="display: flex; justify-content: center; height: 40px; align-items: center;">
+          <div class="block-connection" style="width: 2px; height: 100%; flex-direction: row;" id="sim-arrow-4">
+            <div class="arrow-line" style="width: 2px; height: 100%;" id="sim-arrow-line-4">
+              <div class="connection-dot" style="top: 0; left: -3px; animation: slide-dot-vertical 1.5s infinite linear;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCK 4 -->
+        <div class="visual-block valid-block" id="sandbox-block-4" style="width: 100%; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <!-- Left: Input Fields -->
+          <div>
+            <div class="block-header">
+              <span class="block-title-number">Block #4</span>
+              <span class="block-status status-valid" id="sim-block-4-status">✔ VALID</span>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Previous Hash</label>
+              <textarea class="block-input prev-hash-textarea" id="sim-block-4-prev" readonly></textarea>
+            </div>
+            
+            <div class="block-field">
+              <label class="block-field-label">Transaction Data (Editable)</label>
+              <textarea class="block-input" id="sim-block-4-data" style="height: 60px; resize: vertical;"></textarea>
+            </div>
+          </div>
+
+          <!-- Right: Hash, Nonce, Mine, and Live Logs -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="block-field" style="margin-bottom: 0.5rem;">
+                <label class="block-field-label">Current Calculated Hash</label>
+                <div class="block-hash-display" id="sim-block-4-hash">Calculating...</div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                <div class="block-nonce-wrapper" style="flex: 1;">
+                  <span class="block-field-label" style="margin: 0;">Nonce</span>
+                  <span class="block-nonce-val" id="sim-block-4-nonce">0</span>
+                </div>
+                <button class="block-mine-btn" id="sim-block-4-mine" style="margin: 0; flex: 1.5; padding: 0.65rem;">
+                  <i data-lucide="hammer" style="width: 0.9rem; height: 0.9rem;"></i> Mine Block #4
+                </button>
+              </div>
+            </div>
+
+            <!-- Dynamic Educational Diagnostic Log -->
+            <div class="hash-avalanche-info" id="sim-block-4-explain" style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.05); padding: 0.75rem; min-height: 80px; display: flex; align-items: center;">
+              <span style="color: var(--text-muted); font-size: 0.85rem;">Sandbox logs loading...</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Chain Healing Controls -->
+      <div style="display: flex; justify-content: center; margin-top: 4rem; gap: 1.5rem;">
+        <button class="btn-control" id="sandbox-repair-btn" style="background: rgba(124, 58, 237, 0.1); border-color: rgba(124, 58, 237, 0.3); color: #c084fc;">
+          <i data-lucide="shield-check"></i> Re-Calculate & Mine Whole Chain
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Inject Vertical Dot Animation -->
+  <style>
+    @keyframes slide-dot-vertical {
+      0% { top: 0%; opacity: 1; }
+      80% { opacity: 1; }
+      100% { top: 95%; opacity: 0; }
+    }
+  </style>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="logo-link">
+          <div class="logo-icon">
+            <i data-lucide="layers" style="color: #FFFFFF; width: 1.1rem; height: 1.1rem;"></i>
+          </div>
+          <span class="logo-text">ARBITRUM<span class="logo-badge">PODS</span></span>
+        </a>
+        <p>A cutting-edge visual classroom visualizer illustrating block connections, security seals, and consensus mechanics. Built for the Arbitrum Builder Pods assignment.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Learning Hub</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="index.html" class="footer-link">Home Visualizer</a></li>
+          <li class="footer-link-item"><a href="concepts.html" class="footer-link">Web3 Concepts</a></li>
+          <li class="footer-link-item"><a href="prices.html" class="footer-link">Crypto Price Feeds</a></li>
+          <li class="footer-link-item"><a href="simulator.html" class="footer-link">Simulator Sandbox</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Arbitrum Tech</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="https://arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Arbitrum.io</a></li>
+          <li class="footer-link-item"><a href="https://portal.arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Developer Portal</a></li>
+          <li class="footer-link-item"><a href="https://offchainlabs.com/" target="_blank" class="footer-link" rel="noreferrer">Offchain Labs</a></li>
+          <li class="footer-link-item"><a href="https://docs.arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Documentation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Developer Info</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Course Assignment</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Arbitrum Builder Pods</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Vanilla HTML, CSS & JS</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Portfolio Grade Project</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        &copy; 2026 Arbitrum Builder Pods Visualizer. Created under open-source academic guidelines. All rights reserved.
+      </div>
+      <div class="footer-socials">
+        <a href="https://github.com" target="_blank" class="social-icon" rel="noreferrer" aria-label="GitHub"><i data-lucide="github" style="width: 1rem; height: 1rem;"></i></a>
+        <a href="https://twitter.com" target="_blank" class="social-icon" rel="noreferrer" aria-label="Twitter"><i data-lucide="twitter" style="width: 1rem; height: 1rem;"></i></a>
+        <a href="https://discord.gg" target="_blank" class="social-icon" rel="noreferrer" aria-label="Discord"><i data-lucide="message-square" style="width: 1rem; height: 1rem;"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="/js/simulator.js"></script>
+  
+  <!-- Render Lucide Vectors -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

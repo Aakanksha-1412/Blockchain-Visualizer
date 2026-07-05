@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Crypto Prices - Blockchain Visualizer</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Floating Background Particle Effect -->
+  <div id="particles-container"></div>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon">
+          <i data-lucide="layers" style="color: #FFFFFF; width: 1.25rem; height: 1.25rem;"></i>
+        </div>
+        <span class="logo-text">ARBITRUM<span class="logo-badge">PODS</span></span>
+      </a>
+      
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link" id="link-home">Home</a></li>
+        <li><a href="concepts.html" class="nav-link" id="link-concepts">Concepts</a></li>
+        <li><a href="prices.html" class="nav-link active" id="link-prices">Live Prices</a></li>
+        <li><a href="simulator.html" class="nav-link" id="link-simulator">Simulator</a></li>
+        <li>
+          <button class="nav-cta" onclick="window.location.href='simulator.html'">
+            <i data-lucide="cpu" style="width: 1rem; height: 1rem;"></i> Launch Simulator
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    
+    <!-- Header Section -->
+    <section class="hero" style="padding: 3rem 1rem 1rem;">
+      <div class="hero-badge" style="background: rgba(34, 197, 94, 0.08); border-color: rgba(34, 197, 94, 0.2); color: #4ade80;">
+        <i data-lucide="activity" style="width: 0.9rem; height: 0.9rem;"></i> <span id="api-status-label">● LIVE FEED</span>
+      </div>
+      <h1 class="hero-title" style="margin-bottom: 1rem;">
+        Real-Time <span>Web3 Token</span> Feeds
+      </h1>
+      <p class="hero-subtitle">
+        Stay updated with active crypto asset prices from CoinGecko. Understand token structures across Layer 1 chains and high-performance Ethereum Layer 2 rollups.
+      </p>
+    </section>
+
+    <!-- Controls Container -->
+    <section class="prices-section" style="padding-bottom: 5rem;">
+      
+      <div class="prices-controls">
+        <div class="search-box">
+          <i data-lucide="search" class="search-icon" style="width: 1rem; height: 1rem;"></i>
+          <input type="text" class="search-input" id="price-search" placeholder="Search by coin name or ticker...">
+        </div>
+        
+        <button class="btn-refresh" id="refresh-prices-btn">
+          <i data-lucide="rotate-cw" style="width: 1rem; height: 1rem;"></i> Refresh Market Data
+        </button>
+      </div>
+
+      <div class="last-updated-text">
+        Last pulled: <span id="last-updated-time">--:--:--</span>
+      </div>
+
+      <!-- Live Price Cards Grid -->
+      <div class="prices-grid" id="prices-container">
+        
+        <!-- Generated Dynamically by prices.js -->
+        <div class="spinner-container" id="price-loader">
+          <div class="spinner"></div>
+          <p>Connecting to CoinGecko server...</p>
+        </div>
+
+      </div>
+
+      <!-- Educational Context Panel -->
+      <div class="analogy-card" style="margin-top: 4rem; background: rgba(24, 24, 27, 0.5); backdrop-filter: blur(8px);">
+        <div class="analogy-header">
+          <div class="analogy-icon-wrap" style="background: rgba(124, 58, 237, 0.1); color: var(--primary-purple);">
+            <i data-lucide="info"></i>
+          </div>
+          <h3>API Rate Limiting Explained</h3>
+        </div>
+        <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-gray);">
+          Public APIs (like CoinGecko's free tier) enforce stringent limits on how many calls can be completed from a single network per minute. To ensure absolute platform durability and continuous classroom demonstrations, this page automatically transitions to a **High-Fidelity Simulated Market Feed** if it catches a rate limit error (HTTP 429). The system continues showing active market fluctuations so the interface never looks broken!
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="logo-link">
+          <div class="logo-icon">
+            <i data-lucide="layers" style="color: #FFFFFF; width: 1.1rem; height: 1.1rem;"></i>
+          </div>
+          <span class="logo-text">ARBITRUM<span class="logo-badge">PODS</span></span>
+        </a>
+        <p>A cutting-edge visual classroom visualizer illustrating block connections, security seals, and consensus mechanics. Built for the Arbitrum Builder Pods assignment.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Learning Hub</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="index.html" class="footer-link">Home Visualizer</a></li>
+          <li class="footer-link-item"><a href="concepts.html" class="footer-link">Web3 Concepts</a></li>
+          <li class="footer-link-item"><a href="prices.html" class="footer-link">Crypto Price Feeds</a></li>
+          <li class="footer-link-item"><a href="simulator.html" class="footer-link">Simulator Sandbox</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Arbitrum Tech</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item"><a href="https://arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Arbitrum.io</a></li>
+          <li class="footer-link-item"><a href="https://portal.arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Developer Portal</a></li>
+          <li class="footer-link-item"><a href="https://offchainlabs.com/" target="_blank" class="footer-link" rel="noreferrer">Offchain Labs</a></li>
+          <li class="footer-link-item"><a href="https://docs.arbitrum.io/" target="_blank" class="footer-link" rel="noreferrer">Documentation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Developer Info</h4>
+        <ul class="footer-links">
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Course Assignment</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Arbitrum Builder Pods</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Vanilla HTML, CSS & JS</li>
+          <li class="footer-link-item" style="color: var(--text-gray); font-size: 0.9rem;">Portfolio Grade Project</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        &copy; 2026 Arbitrum Builder Pods Visualizer. Created under open-source academic guidelines. All rights reserved.
+      </div>
+      <div class="footer-socials">
+        <a href="https://github.com" target="_blank" class="social-icon" rel="noreferrer" aria-label="GitHub"><i data-lucide="github" style="width: 1rem; height: 1rem;"></i></a>
+        <a href="https://twitter.com" target="_blank" class="social-icon" rel="noreferrer" aria-label="Twitter"><i data-lucide="twitter" style="width: 1rem; height: 1rem;"></i></a>
+        <a href="https://discord.gg" target="_blank" class="social-icon" rel="noreferrer" aria-label="Discord"><i data-lucide="message-square" style="width: 1rem; height: 1rem;"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="/js/prices.js"></script>
+  
+  <!-- Render Lucide Vectors -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
