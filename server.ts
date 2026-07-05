@@ -1,7 +1,7 @@
 /**
   Arbitrum Builder Pods - Blockchain Visualizer
   Backend: server.ts
-  Custom Express Server to host Vanilla HTML/CSS/JS Assets
+  Custom Express Server to host Vanilla HTMLcss/JS Assets
 */
 
 import express from 'express';
