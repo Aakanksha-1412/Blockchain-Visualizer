@@ -2,7 +2,7 @@
 
 A premium, interactive, dark-themed Web3 educational classroom visualizer and blockchain simulator sandbox. This application teaches students and developers how blocks connect cryptographically, why transaction tampering invalidates distributed ledger records, how Proof-of-Work consensus operates, and how Layer 2 solutions (like Arbitrum) scale Ethereum.
 
-**Live Demo:**https://aakanksha-1412.github.io/Blockchain-Visualizer/
+**Live Demo:** https://aakanksha-1412.github.io/Blockchain-Visualizer/
 
 
 ---
@@ -117,13 +117,7 @@ npm run start
 
 ---
 
-## 📺 Screenshots (Placeholders)
 
-| Primary Visualizer | Sandbox Lab Simulator |
-|---|---|
-| ![Visual Linkage Layout](https://via.placeholder.com/600x350/18181b/ffffff?text=Interactive+Connected+Blocks) | ![Sandbox Logs](https://via.placeholder.com/600x350/18181b/ffffff?text=Terminal+Diagnostic+Logs+Sandbox) |
-
----
 
 ## 🔮 Future Enhancements
 
