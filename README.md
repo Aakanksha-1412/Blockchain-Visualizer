@@ -2,7 +2,8 @@
 
 A premium, interactive, dark-themed Web3 educational classroom visualizer and blockchain simulator sandbox. This application teaches students and developers how blocks connect cryptographically, why transaction tampering invalidates distributed ledger records, how Proof-of-Work consensus operates, and how Layer 2 solutions (like Arbitrum) scale Ethereum.
 
-**Portfolio URL:** [Blockchain Visualizer Sandbox](https://ai.studio/build)
+**Live Demo:**https://aakanksha-1412.github.io/Blockchain-Visualizer/
+
 
 ---
 
